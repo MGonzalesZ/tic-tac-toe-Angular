@@ -18,11 +18,17 @@ export class AppComponent {
 
   jugador = 'O';
 
+  num_jug = 0;
+
   pintar(fila: number, columna: number) {
     if (this.libre(fila, columna)) {
       this.posiciones[fila][columna] = this.jugador;
-
+      this.num_jug++;
       this.verificar_ganador(this.jugador);
+      if (this.lleno()) {
+        alert('El juego terminó en un empate');
+        this.reiniciar();
+      }
       this.cambiar_jugador();
     }
   }
@@ -44,6 +50,7 @@ export class AppComponent {
       this.posiciones[0][2] == jugador
     ) {
       alert(`Ganó el jugador ${jugador}`);
+      this.reiniciar();
     }
 
     if (
@@ -52,6 +59,7 @@ export class AppComponent {
       this.posiciones[1][2] == jugador
     ) {
       alert(`Ganó el jugador ${jugador}`);
+      this.reiniciar();
     }
 
     if (
@@ -60,6 +68,7 @@ export class AppComponent {
       this.posiciones[2][2] == jugador
     ) {
       alert(`Ganó el jugador ${jugador}`);
+      this.reiniciar();
     }
 
     if (
@@ -68,6 +77,7 @@ export class AppComponent {
       this.posiciones[2][0] == jugador
     ) {
       alert(`Ganó el jugador ${jugador}`);
+      this.reiniciar();
     }
 
     if (
@@ -76,6 +86,7 @@ export class AppComponent {
       this.posiciones[2][1] == jugador
     ) {
       alert(`Ganó el jugador ${jugador}`);
+      this.reiniciar();
     }
 
     if (
@@ -84,6 +95,7 @@ export class AppComponent {
       this.posiciones[2][2] == jugador
     ) {
       alert(`Ganó el jugador ${jugador}`);
+      this.reiniciar();
     }
 
     if (
@@ -92,6 +104,7 @@ export class AppComponent {
       this.posiciones[2][2] == jugador
     ) {
       alert(`Ganó el jugador ${jugador}`);
+      this.reiniciar();
     }
 
     if (
@@ -100,14 +113,28 @@ export class AppComponent {
       this.posiciones[2][0] == jugador
     ) {
       alert(`Ganó el jugador ${jugador}`);
+      this.reiniciar();
     }
   }
 
   reiniciar() {
-    for (let fila = 0; fila <= this.posiciones.length; fila++) {
-      for (let columna = 0; columna <= this.posiciones.length; columna++) {
+    for (let fila = 0; fila < this.posiciones.length; fila++) {
+      for (let columna = 0; columna < this.posiciones.length; columna++) {
         this.posiciones[fila][columna] = '?';
       }
     }
+    this.num_jug = 0;
+  }
+
+  lleno(): boolean {
+    let bandera = true;
+    for (let fila = 0; fila < this.posiciones.length; fila++) {
+      for (let columna = 0; columna < this.posiciones.length; columna++) {
+        if (this.posiciones[fila][columna] == '?') {
+          bandera = false;
+        }
+      }
+    }
+    return bandera;
   }
 }

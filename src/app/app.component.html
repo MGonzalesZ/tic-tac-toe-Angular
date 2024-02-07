@@ -11,3 +11,9 @@
 <button mat-raised-button (click)="pintar(2, 0)">{{ posiciones[2][0] }}</button>
 <button mat-raised-button (click)="pintar(2, 1)">{{ posiciones[2][1] }}</button>
 <button mat-raised-button (click)="pintar(2, 2)">{{ posiciones[2][2] }}</button>
+<br />
+<br />
+<button mat-raised-button color="accent" (click)="reiniciar()">
+  REINICIAR
+</button>
+<p>Número de jugadas: {{ num_jug }}</p>
